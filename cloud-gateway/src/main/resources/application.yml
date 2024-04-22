@@ -1,0 +1,36 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: CLOUD-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: TWEET-SERVICE
+          uri: lb://TWEET-SERVICE
+          predicates:
+            - Path=/api/tweets/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: TWEET-SERVICE
+                fallbackuri: forward:/tweetServiceFallBack
+#        - id: PRODUCT-SERVICE
+#          uri: lb://PRODUCT-SERVICE
+#          predicates:
+#            - Path=/api/products/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: PRODUCT-SERVICE
+#                fallbackuri: forward:/productServiceFallBack
+#        - id: PAYMENT-SERVICE
+#          uri: lb://PAYMENT-SERVICE
+#          predicates:
+#            - Path=/api/payments
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: PAYMENT-SERVICE
+#                fallbackuri: forward:/paymentServiceFallBack
