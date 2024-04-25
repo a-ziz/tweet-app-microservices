@@ -1,6 +1,10 @@
 package com.aziz.tweet.service.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.aziz.tweet.service.entity.Tweet;
 
-public interface TweetRepository extends JpaRepository {
+import java.util.List;
+
+public interface TweetRepository extends JpaRepository<Tweet, Long> {
+//  List<Tweet> findByUserId(Long userId);
 }
